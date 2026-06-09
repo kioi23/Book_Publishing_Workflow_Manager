@@ -1,4 +1,14 @@
 # This module defines the Book class, which represents a book in the book publishing workflow manager. The Book class includes attributes such as title, genre, author, editor, tasks, and milestone, as well as a unique ID for each book.
+class Task:
+
+    def __init__(self, title, editor): # Initializes a Task object with a title and an editor. It also initializes the feedback and status attributes of the task.
+        self.title = title
+        self.editor = editor
+
+        self.feedback = ""
+
+        self.status = "Pending"
+
 # encapsuation of the Book class, which includes attributes and methods related to a book in the publishing workflow.
 
 @property # Getter for the milestone attribute of the Book class. It returns the current milestone of the book.
