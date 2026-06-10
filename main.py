@@ -31,4 +31,15 @@ if args.command == "add-author":
         f"Author Created: {args.name} ({args.email})"
     )
 
+if args.command == "add-author":
 
+  from models.author import Author
+
+if args.command == "add-author":
+
+    author = Author(
+        args.name,
+        args.email
+    )
+
+    print(author)
