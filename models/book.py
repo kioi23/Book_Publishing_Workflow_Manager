@@ -19,3 +19,11 @@ class Book:
 
         self.milestone = "Draft"
     # String representation of the Book object.
+
+
+    def __str__(self):
+        return (
+            f"Book ID: {self.id} | "
+            f"Title: {self.title} | "
+            f"Milestone: {self.milestone}"
+    )
