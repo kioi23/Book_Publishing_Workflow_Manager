@@ -70,6 +70,26 @@ editor_parser.add_argument(
     required=True
 )
 
+    # List Authors Command
+list_authors_parser = subparsers.add_parser(
+    "list-authors",
+    help="Display all authors"
+    )
+
+# LIST EDITORS COMMAND
+
+list_editors_parser = subparsers.add_parser(
+    "list-editors",
+    help="Display all editors"
+)
+
+# LIST BOOKS COMMAND
+
+list_books_parser = subparsers.add_parser(
+    "list-books",
+    help="Display all books"
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -91,10 +111,22 @@ if args.command == "add-author":
             "email": author.email
         }
     )
+    
 
     save_data(data)
 
     print(author)
+
+elif args.command == "list-authors":
+
+    data = load_data()
+
+    for author in data["authors"]:
+        print(
+            f"ID: {author['id']} | "
+            f"{author['name']} | "
+            f"{author['email']}"
+        )
 
 elif args.command == "add-book":
 
@@ -140,10 +172,25 @@ elif args.command == "add-editor":
 
     save_data(data)
 
-    print(editor)
+elif args.command == "list-editors":
 
-    print(
-        f"Editor ID: {editor.id} | "
-        f"{editor.name} | "
-        f"{editor.email}"
-    )
+    data = load_data()
+
+    for editor in data["editors"]:
+        print(
+            f"ID: {editor['id']} | "
+            f"{editor['name']} | "
+            f"{editor['email']}"
+        )
+
+elif args.command == "list-books":
+
+    data = load_data()
+
+    for book in data["books"]:
+        print(
+            f"ID: {book['id']} | "
+            f"{book['title']} | "
+            f"{book['genre']} | "
+            f"{book['milestone']}"
+        )
