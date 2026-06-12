@@ -267,7 +267,12 @@ elif args.command == "add-editor":
         }
     )
 
+    def __str__(self):
+        return f"Editor ID: {self.id} | {self.name} | {self.email}"
+
     save_data(data)
+
+    print(editor)
 
 elif args.command == "list-editors":
 
