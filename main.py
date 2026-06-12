@@ -112,6 +112,18 @@ list_tasks_parser = subparsers.add_parser(
     help="Display all tasks"
 )
 
+# COMPLETE TASK COMMAND
+
+complete_task_parser = subparsers.add_parser(
+    "complete-task",
+    help="Mark a task as completed"
+)
+
+complete_task_parser.add_argument(
+    "--title",
+    required=True
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -246,3 +258,33 @@ elif args.command == "list-tasks":
             f"{task['editor']} | "
             f"{task['status']}"
         )
+
+elif args.command == "complete-task":
+
+    data = load_data()
+
+    found = False
+
+    for task in data["tasks"]:
+
+        if task["title"] == args.title:
+
+            task["status"] = "Completed"
+
+            found = True
+
+    save_data(data)
+
+    if found:
+
+        print(
+            f"Task '{args.title}' completed."
+        )
+
+    else:
+
+        print(
+            "Task not found."
+        )
+
+
