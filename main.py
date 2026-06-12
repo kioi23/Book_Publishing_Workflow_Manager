@@ -124,6 +124,23 @@ complete_task_parser.add_argument(
     required=True
 )
 
+# ASSIGN EDITOR COMMAND
+
+assign_editor_parser = subparsers.add_parser(
+    "assign-editor",
+    help="Assign an editor to a book"
+)
+
+assign_editor_parser.add_argument(
+    "--book",
+    required=True
+)
+
+assign_editor_parser.add_argument(
+    "--editor",
+    required=True
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -287,4 +304,30 @@ elif args.command == "complete-task":
             "Task not found."
         )
 
+elif args.command == "assign-editor":
 
+    data = load_data()
+
+    found = False
+
+    for book in data["books"]:
+
+        if book["title"] == args.book:
+
+            book["editor"] = args.editor
+
+            found = True
+
+    save_data(data)
+
+    if found:
+
+        print(
+            f"Editor '{args.editor}' assigned to '{args.book}'"
+        )
+
+    else:
+
+        print(
+            "Book not found."
+        )
