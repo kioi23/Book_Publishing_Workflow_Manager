@@ -3,6 +3,7 @@ import argparse
 from models.author import Author
 from models.book import Book
 from models.editor import Editor
+from utils.storage import load_data, save_data
 
 # Create parser
 parser = argparse.ArgumentParser(
@@ -80,6 +81,18 @@ if args.command == "add-author":
         args.name,
         args.email
     )
+
+    data = load_data()
+
+    data["authors"].append(
+        {
+            "id": author.id,
+            "name": author.name,
+            "email": author.email
+        }
+    )
+
+    save_data(data)
 
     print(author)
 
