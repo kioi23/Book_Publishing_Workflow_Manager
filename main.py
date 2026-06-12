@@ -2,6 +2,7 @@ import argparse
 
 from models.author import Author
 from models.book import Book
+from models.editor import Editor
 
 # Create parser
 parser = argparse.ArgumentParser(
@@ -51,6 +52,23 @@ book_parser.add_argument(
     required=True
 )
 
+#ADD EDITOR COMMAND
+
+editor_parser = subparsers.add_parser(
+    "add-editor",
+    help="Add a new editor"
+)
+
+editor_parser.add_argument(
+    "--name",
+    required=True
+)
+
+editor_parser.add_argument(
+    "--email",
+    required=True
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -71,6 +89,19 @@ elif args.command == "add-book":
         args.title,
         args.genre,
         args.author
+    )
+
+elif args.command == "add-editor":
+
+    editor = Editor(
+        args.name,
+        args.email
+    )
+
+    print(
+        f"Editor ID: {editor.id} | "
+        f"{editor.name} | "
+        f"{editor.email}"
     )
 
     print(book)
