@@ -141,6 +141,23 @@ assign_editor_parser.add_argument(
     required=True
 )
 
+# UPDATE MILESTONE COMMAND
+
+milestone_parser = subparsers.add_parser(
+    "update-milestone",
+    help="Update a book milestone"
+)
+
+milestone_parser.add_argument(
+    "--book",
+    required=True
+)
+
+milestone_parser.add_argument(
+    "--milestone",
+    required=True
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -331,3 +348,50 @@ elif args.command == "assign-editor":
         print(
             "Book not found."
         )
+
+elif args.command == "update-milestone":
+
+    valid_milestones = [
+        "Draft",
+        "Editing",
+        "Review",
+        "Published"
+    ]
+
+    if args.milestone not in valid_milestones:
+
+        print(
+            "Invalid milestone. Use:"
+        )
+
+        for milestone in valid_milestones:
+            print(f"- {milestone}")
+
+    else:
+
+        data = load_data()
+
+        found = False
+
+        for book in data["books"]:
+
+            if book["title"] == args.book:
+
+                book["milestone"] = args.milestone
+
+                found = True
+
+        save_data(data)
+
+        if found:
+
+            print(
+                f"Book '{args.book}' updated to "
+                f"'{args.milestone}'"
+            )
+
+        else:
+
+            print(
+                "Book not found."
+            )
