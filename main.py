@@ -33,4 +33,3 @@ if args.command == "add-author":
     )
 
     print(author)
-    
