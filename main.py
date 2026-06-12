@@ -1,12 +1,17 @@
 import argparse
 
 from models.author import Author
+from models.book import Book
 
+# Create parser
 parser = argparse.ArgumentParser(
     description="Book Publishing Workflow Manager"
 )
 
+# Create subcommands
 subparsers = parser.add_subparsers(dest="command")
+
+# ADD AUTHOR COMMAND
 
 author_parser = subparsers.add_parser(
     "add-author",
@@ -23,7 +28,33 @@ author_parser.add_argument(
     required=True
 )
 
+
+# ADD BOOK COMMAND
+
+book_parser = subparsers.add_parser(
+    "add-book",
+    help="Add a new book"
+)
+
+book_parser.add_argument(
+    "--title",
+    required=True
+)
+
+book_parser.add_argument(
+    "--genre",
+    required=True
+)
+
+book_parser.add_argument(
+    "--author",
+    required=True
+)
+
+# Read command line arguments
 args = parser.parse_args()
+
+# HANDLE COMMANDS
 
 if args.command == "add-author":
 
@@ -33,3 +64,13 @@ if args.command == "add-author":
     )
 
     print(author)
+
+elif args.command == "add-book":
+
+    book = Book(
+        args.title,
+        args.genre,
+        args.author
+    )
+
+    print(book)
