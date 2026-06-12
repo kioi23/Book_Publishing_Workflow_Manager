@@ -15,5 +15,5 @@ class Author(Person):
 
         self.books = []
 
-    def __str__(self): 
+    def __str__(self):
         return f"Author ID: {self.id} | {self.name} | {self.email}"
