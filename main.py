@@ -158,6 +158,35 @@ milestone_parser.add_argument(
     required=True
 )
 
+# Add Feedback Command
+
+feedback_parser = subparsers.add_parser(
+    "add-feedback",
+    help="Add feedback to a task"
+)
+
+feedback_parser.add_argument(
+    "--task",
+    required=True
+)
+
+feedback_parser.add_argument(
+    "--feedback",
+    required=True
+)
+
+# VIEW FEEDBACK COMMAND
+
+view_feedback_parser = subparsers.add_parser(
+    "view-feedback",
+    help="View task feedback"
+)
+
+view_feedback_parser.add_argument(
+    "--task",
+    required=True
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -395,3 +424,49 @@ elif args.command == "update-milestone":
             print(
                 "Book not found."
             )
+elif args.command == "add-feedback":
+
+    data = load_data()
+
+    found = False
+
+    for task in data["tasks"]:
+
+        if task["title"] == args.task:
+
+            task["feedback"] = args.feedback
+
+            found = True
+
+    save_data(data)
+
+    if found:
+
+        print("Feedback added.")
+
+    else:
+
+        print("Task not found.")
+
+elif args.command == "view-feedback":
+
+    data = load_data()
+
+    found = False
+
+    for task in data["tasks"]:
+
+        if task["title"] == args.task:
+
+            print(
+                f"Feedback: "
+                f"{task['feedback']}"
+            )
+
+            found = True
+
+    if not found:
+
+        print(
+            "Task not found."
+        )
