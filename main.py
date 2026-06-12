@@ -103,5 +103,3 @@ elif args.command == "add-editor":
         f"{editor.name} | "
         f"{editor.email}"
     )
-
-    print(book)
