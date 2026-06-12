@@ -4,6 +4,7 @@ from models.author import Author
 from models.book import Book
 from models.editor import Editor
 from utils.storage import load_data, save_data
+from rich import print
 
 # Create parser
 parser = argparse.ArgumentParser(
