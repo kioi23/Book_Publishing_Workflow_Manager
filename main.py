@@ -103,6 +103,22 @@ elif args.command == "add-book":
         args.genre,
         args.author
     )
+
+    data = load_data()
+
+    data["books"].append(
+        {
+            "id": book.id,
+            "title": book.title,
+            "genre": book.genre,
+            "author": book.author,
+            "editor": None,
+            "milestone": book.milestone
+        }
+    )
+
+    save_data(data)
+
     print(book)
 
 elif args.command == "add-editor":
