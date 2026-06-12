@@ -90,6 +90,7 @@ elif args.command == "add-book":
         args.genre,
         args.author
     )
+    print(book)
 
 elif args.command == "add-editor":
 
