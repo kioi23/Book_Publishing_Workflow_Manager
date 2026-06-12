@@ -90,6 +90,28 @@ list_books_parser = subparsers.add_parser(
     help="Display all books"
 )
 
+# ADD TASK COMMAND
+
+task_parser = subparsers.add_parser(
+    "add-task",
+    help="Add an editing task"
+)
+
+task_parser.add_argument(
+    "--title",
+    required=True
+)
+
+task_parser.add_argument(
+    "--editor",
+    required=True
+)
+#List Tak Commands
+list_tasks_parser = subparsers.add_parser(
+    "list-tasks",
+    help="Display all tasks"
+)
+
 # Read command line arguments
 args = parser.parse_args()
 
@@ -193,4 +215,34 @@ elif args.command == "list-books":
             f"{book['title']} | "
             f"{book['genre']} | "
             f"{book['milestone']}"
+        )
+
+elif args.command == "add-task":
+
+    data = load_data()
+
+    task = {
+        "title": args.title,
+        "editor": args.editor,
+        "feedback": "",
+        "status": "Pending"
+    }
+
+    data["tasks"].append(task)
+
+    save_data(data)
+
+    print(
+        f"Task '{args.title}' assigned to {args.editor}"
+    )
+
+elif args.command == "list-tasks":
+
+    data = load_data()
+
+    for task in data["tasks"]:
+        print(
+            f"{task['title']} | "
+            f"{task['editor']} | "
+            f"{task['status']}"
         )
