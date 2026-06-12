@@ -112,6 +112,20 @@ elif args.command == "add-editor":
         args.email
     )
 
+    data = load_data()
+
+    data["editors"].append(
+        {
+            "id": editor.id,
+            "name": editor.name,
+            "email": editor.email
+        }
+    )
+
+    save_data(data)
+
+    print(editor)
+
     print(
         f"Editor ID: {editor.id} | "
         f"{editor.name} | "

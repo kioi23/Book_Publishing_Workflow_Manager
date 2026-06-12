@@ -14,7 +14,8 @@ def load_data():
         return {
             "authors": [],
             "editors": [],
-            "books": []
+            "books": [],
+            "tasks": []
         }
 
     try:
